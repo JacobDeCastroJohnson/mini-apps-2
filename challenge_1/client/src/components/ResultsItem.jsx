@@ -19,8 +19,9 @@ const ResultsItem = (props) => {
           {item.lang} {' | '}
           {item.category1} {' | '}
           {item.category2} {' | '}
-          {item.granularity} {' | '}
-          {item.description} {' | '}
+          {item.granularity}
+          <br></br>
+          {item.description}
         </span>
       </li>
     <br></br>
