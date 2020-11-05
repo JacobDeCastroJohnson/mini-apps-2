@@ -22,14 +22,15 @@ class App extends React.Component {
     }
     //THIS BINDING AREA
     this.getRecords = this.getRecords.bind(this);
+    this.getSearchRecords = this.getSearchRecords.bind(this);
   }
 
   componentDidMount() {
-    this.getRecords();
+    this.getSearchRecords();
   }
 
   getRecords() {
-    axios.get('/events?_limit=10')
+    axios.get('/events?_limit=100')
       // .then(res => console.log(res.data))
       .then(res => this.setState({
         data: res.data
@@ -37,11 +38,21 @@ class App extends React.Component {
       .catch(console.log)
   }
 
+  getSearchRecords(query) {
+    // axios.get('/events?q=query')
+    axios.get(`/events?q= ${query}`)
+    // .then(res => console.log(res.data))
+    .then(res => this.setState({
+      data: res.data
+    }))
+    .catch(console.log)
+  }
+
   render() {
     return (
       <div>
         <Header />
-        <Search />
+        <Search search={this.getSearchRecords}/>
         <Results historicalLog={this.state.data}/>
       </div>
     )

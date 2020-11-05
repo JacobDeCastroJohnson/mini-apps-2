@@ -1,8 +1,11 @@
 import React from 'react';
 
 class Search extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    // console.log(props);
+
 
     this.state = {
       query: "",
@@ -19,9 +22,11 @@ class Search extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('Search button clicked!' + this.state.query);
+    // alert('Search button clicked!' + this.state.query);
      event.preventDefault();
     // Pass in callback function from App Level here
+    this.props.search(this.state.query);
+
     }
 
   render() {
