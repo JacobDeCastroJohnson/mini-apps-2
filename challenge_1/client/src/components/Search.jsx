@@ -1,4 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const SearchBar = styled.input`
+  width: 400px;
+  margin: auto;
+  box-shadow: 0 0 black;
+`;
 
 class Search extends React.Component {
   constructor(props) {
@@ -33,7 +40,7 @@ class Search extends React.Component {
     // console.log(this.state);
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" name="query" placeholder="Search here" value={this.state.query} onChange={this.handleChange}/>
+        <SearchBar type="text" name="query" placeholder="Search here (ie. death, Greece, Seleucid, etc ...)" value={this.state.query} onChange={this.handleChange}/>
         <button type="submit">Look back in time!</button>
       </form>
 

@@ -5,6 +5,13 @@ import Search from './components/Search.jsx';
 import Results from './components/Results.jsx';
 const axios = require('axios');
 import ReactPaginate from 'react-paginate';
+import styled from 'styled-components'
+
+const MainWrap = styled.div`
+  min-height: 700px;
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(193,187,153,0.7343312324929971) 41%);
+`;
 
 class App extends React.Component {
   constructor() {
@@ -26,11 +33,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getSearchRecords();
+    this.getRecords();
   }
 
+  // GET ALL DB RECORDS - LIMIT to 100)
   getRecords() {
-    axios.get('/events?_limit=100')
+    axios.get('/events?_limit=40')
       // .then(res => console.log(res.data))
       .then(res => this.setState({
         data: res.data
@@ -38,9 +46,10 @@ class App extends React.Component {
       .catch(console.log)
   }
 
+  // GET SEARCH RECORDS - LIMIT to 10 per pargination)
   getSearchRecords(query) {
-    // axios.get('/events?q=query')
-    axios.get(`/events?q= ${query}`)
+    // axios.get('/events?q=query') - pagination limits to 10 records
+    axios.get(`/events?q= ${query}&_page=5`)
     // .then(res => console.log(res.data))
     .then(res => this.setState({
       data: res.data
@@ -50,11 +59,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <MainWrap>
         <Header />
         <Search search={this.getSearchRecords}/>
         <Results historicalLog={this.state.data}/>
-      </div>
+      </MainWrap>
     )
   }
 }

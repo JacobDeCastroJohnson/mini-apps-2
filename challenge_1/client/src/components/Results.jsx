@@ -4,11 +4,10 @@ import ResultsItem from './ResultsItem.jsx';
 const Results = (props) => {
 // console.log(props);
   const { historicalLog } = props;
-  // console.log(historicalLog);
+  console.log(historicalLog);
 
 
   return (
-    // <h3> Test from Results Level </h3>
     <ul>
       {historicalLog.map((item, index) => {
         return (
