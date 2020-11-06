@@ -29,6 +29,7 @@ const Graph = (props) => {
     return (
       <div className="chart">
         <div>
+          <h4> View: LINE </h4>
           <Line
             data={data}
             width={100}
@@ -36,7 +37,9 @@ const Graph = (props) => {
             options={{ maintainAspectRatio: false }} />
 
         </div>
+        <br></br>
       <div>
+        <h4> View: BAR </h4>
         <Bar
            data={data}
            width={100}

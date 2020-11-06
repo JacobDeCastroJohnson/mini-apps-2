@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 const axios = require('axios');
 import Graph from './Graph.jsx';
 import List from './List.jsx';
+import styled from 'styled-components';
+
+const MainWrapper = styled.div`
+  background-color: white;
+`;
 
 
 class App extends React.Component {
@@ -31,11 +36,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <MainWrapper>
         <h2>Cryptocurrency Market Price</h2>
+        <h3> Range: August 1, 2020 - September 1, 2020</h3>
         <List bpi={this.state.bpi}/>
+        <br></br>
         <a href="https://www.coindesk.com/price/bitcoin"> Powered by Coindesk </a>
-      </div>
+      </MainWrapper>
     )
   }
 }
