@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+const axios = require('axios');
 
 class App extends React.Component {
   constructor() {
@@ -9,6 +10,17 @@ class App extends React.Component {
 
     }
     //THIS BINDING AREA
+    this.getData = this.getData.bind(this);
+  }
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData() {
+    axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+    .then(res => console.log(res.data))
+    .catch(console.log)
   }
 
   render() {
