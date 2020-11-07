@@ -1,18 +1,17 @@
 import React from 'react';
+import Tally from './Tally.jsx';
 
 class Score extends React.Component {
   constructor (props){
     super(props)
     this.state = {
       pins: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      bowls: 0,
-      turn: 2,
-      strike: false,
-      spare: false,
-      pinsUp: 10,
-      pinsHit: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      turn: 1,
       frameTotal: 0,
       gameTotal: 0,
+      frame: true,
+
+      scores: [],
     }
     //THIS BINDING AREA
     this.handleClick = this.handleClick.bind(this);
@@ -22,15 +21,85 @@ class Score extends React.Component {
   //frame Reset function
   frameReset() {
     this.setState({
-      frameTotal: 0,
-      strike: false,
-      spare: false,
+      pins: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     })
   }
 
   handleClick(score) {
+    if (this.state.frame) {
+      //Confirmed 1st roll of frame, toggle on execution
+      this.state.frame = !this.state.frame;
 
-    // this.setState({
+      //if not Strike or Spare
+      if (score < 10) {
+        let newScore = this.state.scores;
+        let sliceVal = score - 1;
+        newScore.push(score);
+        this.setState({
+          turn: this.state.turn + 1,
+          scores: newScore,
+          pins: this.state.pins.slice(0, 10 - sliceVal),
+
+        })
+      }
+
+      //If Strike on first Roll
+      if (score === 10) {
+        let newScore = this.state.scores;
+        newScore.push(10,0);
+        this.setState({
+          turn: this.state.turn + 1,
+        })
+      }
+
+    } else {
+      // SECOND ROLL OF FRAME
+
+      //Update Pin options
+      this.frameReset();
+
+      this.state.frame = !this.state.frame;
+      let length = this.state.scores.length - 1;
+      let preScore = this.state.scores[length];
+      let leftPins = 10 - preScore;
+
+
+      if (score <= leftPins) {
+        let newScore = this.state.scores;
+        newScore.push(score);
+        this.setState({
+          turn: this.state.turn + 1,
+          scores: newScore,
+        })
+      }
+    }
+  }
+
+
+  render() {
+    console.log(typeof this.state.pins[1])
+    return(
+      <div>
+        Pick the total number of pins hit:
+        {this.state.pins.map((pin, i) => (
+          <span key={i}>
+            <button className="button" onClick={() => this.handleClick(pin)}>{pin}</button>
+          </span>
+        ))}
+        <h3> Turn: {this.state.turn} </h3>
+        <Tally scores={this.state.scores} />
+      </div>
+    )
+  }
+}
+
+export default Score;
+
+
+/*
+
+
+ // this.setState({
     //   frameTotal: this.state.frameTotal += score,
     //   gameTotal: this.state.gameTotal += score,
     // })
@@ -50,25 +119,4 @@ class Score extends React.Component {
         gameTotal: this.state.gameTotal += score,
         pins: this.state.pins.slice(0, 10 - score),
       })
-    }
-
-
-  }
-  render() {
-    console.log(typeof this.state.pins[1])
-    return(
-      <div>
-        Pick the total number of pins hit:
-        {this.state.pins.map((pin, i) => (
-          <span key={i}>
-            <button className="button" onClick={() => this.handleClick(i)}>{pin}</button>
-          </span>
-        ))}
-        <div> Frame Total: {this.state.frameTotal}</div>
-        <div> Game Total: {this.state.gameTotal}</div>
-      </div>
-    )
-  }
-}
-
-export default Score;
+    }*/

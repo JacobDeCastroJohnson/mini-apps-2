@@ -26,7 +26,7 @@ const Scoreboard = () => {
   return (
     <div className="scoreboard">
       <h3>Score Card</h3>
-      <ScoreHeader>
+      {/* <ScoreHeader>
         <div>1</div>
         <div>2</div>
         <div>3</div>
@@ -50,8 +50,7 @@ const Scoreboard = () => {
         <Frame/>
         <Frame/>
       </ScoreBoard>
-      <h1>Game Score = 133</h1>
-      <br></br>
+      <h1>Game Score = 133</h1> */}
       <Score />
     </div>
   )
