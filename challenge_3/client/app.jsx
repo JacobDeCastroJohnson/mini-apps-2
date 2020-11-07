@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Scoreboard from './components/Scoreboard.jsx';
 
 class App extends React.Component {
   constructor() {
@@ -13,7 +14,10 @@ class App extends React.Component {
 
   render() {
     return(
-      <h1> Test from the front end!</h1>
+      <div>
+        <h1> Lucky Strikes! Bowling</h1>
+        <Scoreboard />
+      </div>
     )
   }
 }

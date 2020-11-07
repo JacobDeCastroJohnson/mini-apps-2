@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "nodemon": "^2.0.6",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "styled-components": "^3.4.10"
   }
 }
