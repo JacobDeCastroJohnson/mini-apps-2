@@ -27,10 +27,10 @@ const Tally = (props) => {
   })
 
   return (
-    <div>
+    <h4>
       ScoreBoard:
       {frameList}
-    </div>
+    </h4>
   )
 }
 

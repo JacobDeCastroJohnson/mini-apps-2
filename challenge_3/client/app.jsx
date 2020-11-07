@@ -16,6 +16,7 @@ class App extends React.Component {
     return(
       <div>
         <h1> Lucky Strikes! Bowling</h1>
+        <img src="Bowl.png" alt="Logo" width="200" height="150" />
         <Scoreboard />
       </div>
     )

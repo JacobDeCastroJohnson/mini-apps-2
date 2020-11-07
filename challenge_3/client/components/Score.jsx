@@ -8,7 +8,7 @@ class Score extends React.Component {
       pins: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       turn: 1,
       frameTotal: 0,
-      gameTotal: 0,
+      gameScore: 0,
       frame: true,
 
       scores: [],
@@ -39,7 +39,7 @@ class Score extends React.Component {
           turn: this.state.turn + 1,
           scores: newScore,
           pins: this.state.pins.slice(0, 10 - sliceVal),
-
+          gameScore: this.state.gameScore + score,
         })
       }
 
@@ -49,12 +49,12 @@ class Score extends React.Component {
         newScore.push(10,0);
         this.setState({
           turn: this.state.turn + 1,
+          gameScore: this.state.gameScore + score,
         })
       }
 
     } else {
       // SECOND ROLL OF FRAME
-
       //Update Pin options
       this.frameReset();
 
@@ -70,11 +70,11 @@ class Score extends React.Component {
         this.setState({
           turn: this.state.turn + 1,
           scores: newScore,
+          gameScore: this.state.gameScore + score,
         })
       }
     }
   }
-
 
   render() {
     console.log(typeof this.state.pins[1])
@@ -86,37 +86,12 @@ class Score extends React.Component {
             <button className="button" onClick={() => this.handleClick(pin)}>{pin}</button>
           </span>
         ))}
-        <h3> Turn: {this.state.turn} </h3>
-        <Tally scores={this.state.scores} />
+        <h2> Turn: {this.state.turn} </h2>
+        <Tally scores={this.state.scores}/>
+        <h1> Total Game Score: {this.state.gameScore} </h1>
       </div>
     )
   }
 }
 
 export default Score;
-
-
-/*
-
-
- // this.setState({
-    //   frameTotal: this.state.frameTotal += score,
-    //   gameTotal: this.state.gameTotal += score,
-    // })
-
-    //Bowl a strike
-    if (this.state.bowls === 0 && score === 10) {
-      this.setState({
-        frameTotal: this.state.frameTotal += score,
-        gameTotal: this.state.gameTotal += score,
-        strike: true,
-        bowls: this.state.bowls+1,
-      })
-    } else {
-      // Bowl a second turn on same frame
-      this.setState({
-        frameTotal: this.state.frameTotal += score,
-        gameTotal: this.state.gameTotal += score,
-        pins: this.state.pins.slice(0, 10 - score),
-      })
-    }*/
