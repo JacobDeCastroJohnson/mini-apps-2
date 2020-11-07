@@ -1,5 +1,13 @@
 import React from 'react';
 import Tally from './Tally.jsx';
+import styled from 'styled-components';
+
+const PinButton = styled.button`
+  padding: 15px;
+    border-color: red;
+    background-color: ghostwhite;
+    font-weight: bold;
+`;
 
 class Score extends React.Component {
   constructor (props){
@@ -7,7 +15,6 @@ class Score extends React.Component {
     this.state = {
       pins: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       turn: 1,
-      frameTotal: 0,
       gameScore: 0,
       frame: true,
 
@@ -80,10 +87,10 @@ class Score extends React.Component {
     console.log(typeof this.state.pins[1])
     return(
       <div>
-        Pick the total number of pins hit:
+        Knock em down:
         {this.state.pins.map((pin, i) => (
           <span key={i}>
-            <button className="button" onClick={() => this.handleClick(pin)}>{pin}</button>
+            <PinButton className="PinButton" onClick={() => this.handleClick(pin)}>{pin}</PinButton>
           </span>
         ))}
         <h2> Turn: {this.state.turn} </h2>
